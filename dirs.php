@@ -20,20 +20,20 @@ require_once("init.php");
 
 function findDirsRecursive($path, array &$dirs) 
 {
-    if ($dir = @opendir($path)) 
+	if ($dir = @opendir($path)) 
 	{
 		$dirs[] = $path;
-        while (false !== ($file = readdir($dir)))
+		while (false !== ($file = readdir($dir)))
 		{
 			if (is_dir($path . '/' . $file) && $file != '.' && $file != '..' && $file != '/')
 			{
 				findDirsRecursive($path . '/' . $file, $dirs);
 			}
-        }
+		}
         
-        closedir($dir);
-    }
-    return $dirs;
+		closedir($dir);
+	}
+	return $dirs;
 }
 
 function allDirs($paths)
@@ -42,7 +42,9 @@ function allDirs($paths)
 	foreach ($paths as $path) 
 	{
 		// strip trailing slashes
-		if (substr($path, -1) == '/' || substr($path, -1) == '\\') $path = substr($path, 0, -1);
+		if (substr($path, -1) == '/' || substr($path, -1) == '\\') {
+			$path = substr($path, 0, -1);
+		}
 		 
 		findDirsRecursive($path, $dirs);
 	}
@@ -53,7 +55,7 @@ function allDirs($paths)
 function newDir($paths)
 {
 	$dirs = allDirs($paths);
-	return $dirs[rand(0, count($dirs)-1)];
+	return $dirs[rand(0, count($dirs) - 1)];
 }
 
 function findFiles($path)
@@ -61,9 +63,9 @@ function findFiles($path)
 	if ($dir = @opendir($path)) 
 	{
 		$files = array();
-        while (false !== ($file = readdir($dir)))
+		while (false !== ($file = readdir($dir)))
 		{
-			if (strtolower(substr($file,strlen($file)-4,4)) == '.jpg') 
+			if (strtolower(substr($file, strlen($file) - 4, 4)) == '.jpg') 
 			{
 				$files[] = $path . '/' . $file;
 			}
@@ -79,7 +81,7 @@ function findAllFiles($paths)
 {
 	$dirs = allDirs($paths);
 	$files = array();
-	foreach($dirs as $dir) 
+	foreach ($dirs as $dir) 
 	{
 		$files = array_merge($files, findFiles($dir));
 	}
