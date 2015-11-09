@@ -23,24 +23,24 @@ require_once("init.php");
 	<head>
 		<title><?php echo $settings["display.name"] ?></title>
 		
-		<link rel="stylesheet" href="css/default.css?<?php echo $version;?>" type="text/css" />
+		<link rel="stylesheet" href="css/default.css?<?php echo $version; ?>" type="text/css" />
 		
-		<script type="text/javascript" src="js/jquery-1.4.min.js?<?php echo $version;?>"></script>
-		<script type="text/javascript" src="js/jquery.text-overflow.min.js?<?php echo $version;?>"></script>
-		<script type="text/javascript" src="js/PhotoFrame.js?<?php echo $version;?>"></script>
+		<script type="text/javascript" src="js/jquery-1.4.min.js?<?php echo $version; ?>"></script>
+		<script type="text/javascript" src="js/jquery.text-overflow.min.js?<?php echo $version; ?>"></script>
+		<script type="text/javascript" src="js/PhotoFrame.js?<?php echo $version; ?>"></script>
 		
 		<script type="text/javascript">
 		$(document).ready(function(){
 			PhotoFrame.init();
-			PhotoFrame.setDisplayInterval  ( <?php echo($settings["display.interval"]);           ?> );
-			PhotoFrame.setTrafficMap       ("<?php echo($settings["traffic.map"]);                ?>");
-			PhotoFrame.setTrafficOverlay   ("<?php echo($settings["traffic.overlay"]);            ?>");
-			PhotoFrame.setWeatherMap       ("<?php echo($settings["weather.map"]);                ?>");
-			PhotoFrame.setWeatherOverlay   ("<?php echo($settings["weather.overlay"]);            ?>");
-			PhotoFrame.setEnableBar        ( <?php echo($settings["display.bar"]?'true':'false'); ?> );
-			PhotoFrame.setEnableFX         ( <?php echo($settings["display.fx"]?'true':'false');  ?> );
-			PhotoFrame.setWebcamsInterval  ( <?php echo($settings["webcams.interval"]);           ?> );
-			PhotoFrame.setConnectionURL    ("<?php echo(isset($settings["connection.url"])?$settings["connection.url"]:'http://www.nu.nl/images/logo_nu_nl.gif'); ?>");
+			PhotoFrame.setDisplayInterval  ( <?php echo($settings["display.interval"]); ?> );
+			PhotoFrame.setTrafficMap       ("<?php echo($settings["traffic.map"]); ?>");
+			PhotoFrame.setTrafficOverlay   ("<?php echo($settings["traffic.overlay"]); ?>");
+			PhotoFrame.setWeatherMap       ("<?php echo($settings["weather.map"]); ?>");
+			PhotoFrame.setWeatherOverlay   ("<?php echo($settings["weather.overlay"]); ?>");
+			PhotoFrame.setEnableBar        ( <?php echo($settings["display.bar"] ? 'true' : 'false'); ?> );
+			PhotoFrame.setEnableFX         ( <?php echo($settings["display.fx"] ? 'true' : 'false'); ?> );
+			PhotoFrame.setWebcamsInterval  ( <?php echo($settings["webcams.interval"]); ?> );
+			PhotoFrame.setConnectionURL    ("<?php echo(isset($settings["connection.url"]) ? $settings["connection.url"] : 'http://www.nu.nl/images/logo_nu_nl.gif'); ?>");
 
 			<?php 
 				if (isset($settings['photo.collapse_dirs']) && $settings['photo.collapse_dirs'])
@@ -57,7 +57,7 @@ require_once("init.php");
 				<?php 
 					foreach ($settings['display.keys'] as $key => $options)
 					{
-						echo('if (letter == "' . substr($key, 0, 1) .'") {');
+						echo('if (letter == "' . substr($key, 0, 1) . '") {');
 						echo($options['function'] . ';');
 						echo('}');
 					}
@@ -75,8 +75,8 @@ require_once("init.php");
 				}
 			?>
 
-			<?php if($settings["display.about"])    echo('PhotoFrame.showAbout();'); ?>
-			<?php if($settings["connection.check"]) echo('PhotoFrame.checkConnection();'); ?>
+			<?php if ($settings["display.about"])    echo('PhotoFrame.showAbout();'); ?>
+			<?php if ($settings["connection.check"]) echo('PhotoFrame.checkConnection();'); ?>
 
 			PhotoFrame.start();
 		});
@@ -87,14 +87,14 @@ require_once("init.php");
 		<div id="container">
 			<div id="background"></div>
 			<?php if ($settings["display.bar"]) { ?>
-			<div id="bar" style="<?php if (isset($settings['display.bar_top'])) echo 'top:'.$settings['display.bar_top']; ?>">
+			<div id="bar" style="<?php if (isset($settings['display.bar_top'])) echo 'top:' . $settings['display.bar_top']; ?>">
 				<div id="clock">
 					<div class="holder" id="hours"></div>
 					<div class="holder" id="minutes"></div>
 					<?php if ($settings['connection.wifi']) {?>
-						<img id="connectionerror" src="img/transmit_error.png?<?php echo $version;?>"/>
+						<img id="connectionerror" src="img/transmit_error.png?<?php echo $version; ?>"/>
 					<?php } else {?>
-						<img id="connectionerror" src="img/disconnect.png?<?php echo $version;?>"/>
+						<img id="connectionerror" src="img/disconnect.png?<?php echo $version; ?>"/>
 					<?php } ?>
 				</div>
 				<div id="quotes"></div>
@@ -103,26 +103,26 @@ require_once("init.php");
 			<div id="traffic">
 				<?php
 					$trafficStyle = '';
-					if (!empty($settings['traffic.width']))  $trafficStyle .= 'width: '  . $settings['traffic.width']  . ';';
+					if (!empty($settings['traffic.width']))  $trafficStyle .= 'width: ' . $settings['traffic.width'] . ';';
 					if (!empty($settings['traffic.height'])) $trafficStyle .= 'height: ' . $settings['traffic.height'] . ';'; 
 					
-					if (!empty($settings['traffic.map']))     echo '<img class="map"     src="' . $settings['traffic.map']     . '" style="' . $trafficStyle .'"/>';
-					if (!empty($settings['traffic.overlay'])) echo '<img class="overlay" src="' . $settings['traffic.overlay'] . '" style="' . $trafficStyle .'"/>';
+					if (!empty($settings['traffic.map']))     echo '<img class="map"     src="' . $settings['traffic.map'] . '" style="' . $trafficStyle . '"/>';
+					if (!empty($settings['traffic.overlay'])) echo '<img class="overlay" src="' . $settings['traffic.overlay'] . '" style="' . $trafficStyle . '"/>';
 				?>	
 			</div>
 			<div id="weather">
 				<?php
 					$weatherStyle = '';
-					if (!empty($settings['weather.width']))  $weatherStyle .= 'width: '  . $settings['weather.width']  . ';';
+					if (!empty($settings['weather.width']))  $weatherStyle .= 'width: ' . $settings['weather.width'] . ';';
 					if (!empty($settings['weather.height'])) $weatherStyle .= 'height: ' . $settings['weather.height'] . ';';
 					
-					if (!empty($settings['weather.map']))     echo '<img class="map"     src="' . $settings['weather.map']     . '" style="' . $weatherStyle .'"/>';
-					if (!empty($settings['weather.overlay'])) echo '<img class="overlay" src="' . $settings['weather.overlay'] . '" style="' . $weatherStyle .'"/>';
+					if (!empty($settings['weather.map']))     echo '<img class="map"     src="' . $settings['weather.map'] . '" style="' . $weatherStyle . '"/>';
+					if (!empty($settings['weather.overlay'])) echo '<img class="overlay" src="' . $settings['weather.overlay'] . '" style="' . $weatherStyle . '"/>';
 				?>	
 			</div>
 			<div id="about">
 				<a href="http://github.com/janpaul123/photoframed" target="_blank">
-					<img src="img/logo.png?<?php echo $version;?>"/>
+					<img src="img/logo.png?<?php echo $version; ?>"/>
 					<div class="title">Photoframed</div>
 					<div class="link">github.com/janpaul123/photoframed</div>
 				</a>
@@ -134,7 +134,7 @@ require_once("init.php");
 					foreach ($settings['display.keys'] as $key => $options)
 					{
 						echo('<tr><td class="key">');
-						echo('<strong>' . (isset($options['key']) ? $options['key'] : $key) .'</strong>');
+						echo('<strong>' . (isset($options['key']) ? $options['key'] : $key) . '</strong>');
 						echo('</td><td class="title">');
 						echo($options['title'] . '<br />');
 						echo('</tr>');
@@ -148,15 +148,15 @@ require_once("init.php");
 					$styleImageAllowed = array('width', 'height', 'max-width', 'max-height', 'min-width', 'min-height');
 					foreach ($settings['webcams.cams'] as $nr => $cam)
 					{
-						$styleDiv='';
-						$styleImage='';
+						$styleDiv = '';
+						$styleImage = '';
 						
-						foreach($styleDivAllowed as $element) 
+						foreach ($styleDivAllowed as $element) 
 						{
 							if (isset($cam[$element])) $styleDiv .= $element . ': ' . $cam[$element] . '; ';
 						}
 						
-						foreach($styleImageAllowed as $element) 
+						foreach ($styleImageAllowed as $element) 
 						{
 							if (isset($cam[$element])) $styleImage .= $element . ': ' . $cam[$element] . '; ';
 						}
@@ -174,7 +174,7 @@ require_once("init.php");
 						echo('</div>');
 						echo('<div class="title">' . $cam['title'] . '</div>');
 						echo('<div class="shadow" id="shadow-webcam-' . $nr . '"></div>');
-						echo('<img class="error"  id="error-webcam-'  . $nr . '" src="img/webcam_error.png?<?php echo $version;?>"/>');
+						echo('<img class="error"  id="error-webcam-' . $nr . '" src="img/webcam_error.png?<?php echo $version;?>"/>');
 						echo('</div>');
 						echo('</div>');
 					}

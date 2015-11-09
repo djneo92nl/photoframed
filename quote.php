@@ -24,14 +24,15 @@ if ($settings['rss.random'])
 	$old = (isset($_SESSION['rss.current']) ? $_SESSION['rss.current'] : 0);
 	do
 	{
-		$current = rand(0, count($settings['rss.feeds'])-1);
+		$current = rand(0, count($settings['rss.feeds']) - 1);
 	} while ($current != $old && count($settings['rss.feeds']) > 1);
-}
-else
+} else
 {
 	$current = (isset($_SESSION['rss.current']) ? $_SESSION['rss.current'] + 1 : 0);
-	if ($current >= count($settings['rss.feeds'])) $current = 0;
-}
+	if ($current >= count($settings['rss.feeds'])) {
+		$current = 0;
+	}
+	}
 
 $_SESSION['rss.current'] = $current;
 
@@ -42,7 +43,7 @@ $cache = 'cache/' . $feed['cache'];
 
 // load news file if older than 15 minutes
 $time = file_exists($cache) ? filemtime($cache) : 0;
-if ($time + 5*60 < time()) 
+if ($time + 5 * 60 < time()) 
 {
 	try
 	{
@@ -50,11 +51,11 @@ if ($time + 5*60 < time())
 		$xml = file_get_contents($feed['url'], 0, $context);
 		if (empty($xml)) throw new Exception('empty xml');
 		
-		$file    = fopen($cache, "w");
+		$file = fopen($cache, "w");
 		fwrite($file, $xml);
 		fclose($file);
 	}
-	catch(Exception $e)
+	catch (Exception $e)
 	{
 		$xml = file_get_contents($cache);
 	}
@@ -67,7 +68,7 @@ else
 $data = simplexml_load_string($xml);
 
 echo('<div class="holder logo"><div class="center">');
-echo('<img src="' . $feed["logo"].'""/>');
+echo('<img src="' . $feed["logo"] . '""/>');
 echo('</div></div>');
 
 if (empty($data->channel->item))
